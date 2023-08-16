@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class CustomerDataAccessService implements CustomerDao {
+@Repository("list")
+public class CustomerListDataAccessService implements CustomerDao {
 
     // db
     private static final List<Customer> customers;
@@ -15,10 +15,10 @@ public class CustomerDataAccessService implements CustomerDao {
     static {
         customers = new ArrayList<>();
 
-        Customer alex = new Customer(1, "Kushal", "kushalshr@gmail.com", 21);
+        Customer alex = new Customer(1, "Alex", "alex@gmail.com", 21);
         customers.add(alex);
 
-        Customer jamila = new Customer(2, "Anil", "anil@gmail.com", 17);
+        Customer jamila = new Customer(2, "Jamila", "jamila@gmail.com", 19);
         customers.add(jamila);
     }
 
@@ -34,4 +34,5 @@ public class CustomerDataAccessService implements CustomerDao {
                                       .equals(id))
                         .findFirst();
     }
+
 }
