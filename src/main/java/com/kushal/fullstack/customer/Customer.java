@@ -1,4 +1,4 @@
-package com.kushal.fullstack;
+package com.kushal.fullstack.customer;
 
 import java.util.Objects;
 

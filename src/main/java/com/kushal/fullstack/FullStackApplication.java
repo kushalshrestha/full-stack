@@ -1,5 +1,6 @@
 package com.kushal.fullstack;
 
+import com.kushal.fullstack.customer.Customer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,20 +30,7 @@ public class FullStackApplication {
     }
 
 
-    @GetMapping("api/v1/customers")
-    public List<Customer> getCustomers() {
-        return customers;
-    }
 
-    @GetMapping("api/v1/customers/{customerId}")
-    public Customer getCustomer(@PathVariable("customerId") Integer customerId) {
-        Customer customer = customers.stream()
-                                     .filter(c -> c.getId()
-                                                   .equals(customerId))
-                                     .findFirst()
-                                     .orElseThrow(() -> new IllegalArgumentException(("customer with id [%s] not " + "found").formatted(customerId)));
-        return customer;
-    }
 
     @GetMapping("/greet")
     public GreetResponse greet(
