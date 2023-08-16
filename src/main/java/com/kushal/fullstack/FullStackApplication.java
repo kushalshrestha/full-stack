@@ -1,8 +1,13 @@
 package com.kushal.fullstack;
 
 import com.kushal.fullstack.customer.Customer;
+import com.sun.tools.javac.Main;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,25 +33,4 @@ public class FullStackApplication {
     public static void main(String[] args) {
         SpringApplication.run(FullStackApplication.class, args);
     }
-
-
-
-
-    @GetMapping("/greet")
-    public GreetResponse greet(
-            @RequestParam(value = "name", required = false) String name
-    ) {
-        String greetMessage = name == null || name.isBlank() ? "Hello" : "Hello " + name;
-
-        GreetResponse response = new GreetResponse(greetMessage, List.of("Java", "Golang", "Javascript"), new Person("Alex", 28, 30_000));
-
-        return response;
-    }
-
-    record Person(String name, int age, double savings) {
-
-    }
-
-    record GreetResponse(String greet, List<String> favProgrammingLanguages, Person person) {}
-
 }
