@@ -45,7 +45,7 @@ public class FullStackApplication {
             Customer anil = new Customer("Anil", "anil@gmail.com", 19);
 
             List<Customer> customers = List.of(kushal, anil);
-            customerRepository.saveAll(customers);
+//            customerRepository.saveAll(customers);
         };
     }
 
