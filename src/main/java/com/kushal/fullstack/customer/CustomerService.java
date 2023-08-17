@@ -13,7 +13,7 @@ public class CustomerService {
 
     private final CustomerDao customerDao;
 
-    public CustomerService(@Qualifier("jpa") CustomerDao customerDao) {
+    public CustomerService(@Qualifier("jdbc") CustomerDao customerDao) {
         this.customerDao = customerDao;
     }
 
@@ -60,17 +60,17 @@ public class CustomerService {
         }
 
         if (updateRequest.name() != null && !updateRequest.name()
-                                                             .equals(customer.getName())) {
+                                                          .equals(customer.getName())) {
             customer.setName(updateRequest.name());
             changes = true;
         }
         if (updateRequest.email() != null && !updateRequest.email()
-                                                              .equals(customer.getEmail())) {
+                                                           .equals(customer.getEmail())) {
             customer.setName(updateRequest.email());
             changes = true;
         }
         if (updateRequest.age() != null && !updateRequest.age()
-                                                            .equals(customer.getAge())) {
+                                                         .equals(customer.getAge())) {
             customer.setAge(updateRequest.age());
             changes = true;
         }
