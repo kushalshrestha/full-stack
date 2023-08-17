@@ -10,11 +10,13 @@ spring:
     password: kushal10
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: validate
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+  flyway:
+    baseline-on-migrate: true
   main:
     web-application-type: servlet

@@ -1,5 +1,7 @@
 package com.kushal.fullstack;
 
+import com.github.javafaker.Faker;
+import com.github.javafaker.Name;
 import com.kushal.fullstack.customer.Customer;
 import com.kushal.fullstack.customer.CustomerRepository;
 import com.sun.tools.javac.Main;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @SpringBootApplication
 @RestController
@@ -40,13 +43,24 @@ public class FullStackApplication {
     @Bean
     CommandLineRunner runner(CustomerRepository customerRepository) {
         return args -> {
-            Customer kushal = new Customer("Kushal", "kushalshr@gmail.com",21);
-
-            Customer anil = new Customer("Anil", "anil@gmail.com", 19);
-
-            List<Customer> customers = List.of(kushal, anil);
+//            Customer kushal = new Customer("Kushal", "kushalshr@gmail.com", 21);
+//
+//            Customer anil = new Customer("Anil", "anil@gmail.com", 19);
+//
+//            List<Customer> customers = List.of(kushal, anil);
 //            customerRepository.saveAll(customers);
-        };
-    }
 
-}
+
+                var faker = new Faker();
+                Random random = new Random();
+                Name name = faker.name();
+                String firstName = name.firstName();
+                String lastName = name.lastName();
+                Customer customer = new Customer(firstName + " " + lastName,
+                                                 firstName.toLowerCase() + "." + lastName.toLowerCase() + "@gmail.com",
+                                                 random.nextInt(16, 99));
+                customerRepository.save(customer);
+            };
+        }
+
+    }
