@@ -1,6 +1,7 @@
 package com.kushal.fullstack.customer;
 
-import com.kushal.fullstack.exception.ResourceNotFound;
+import com.kushal.fullstack.exception.DuplicateResourceException;
+import com.kushal.fullstack.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,17 @@ public class CustomerService {
 
     public Customer getCustomer(Integer id) {
         return customerDao.selectCustomerById(id)
-                          .orElseThrow(() -> new ResourceNotFound("customer with id [%s] not found".formatted(id)));
+                          .orElseThrow(() -> new ResourceNotFoundException("customer with id [%s] not found".formatted(id)));
     }
 
+    public void addCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
+        String email = customerRegistrationRequest.email();
+        if (customerDao.exsitsPersonWithEmail(email)) {
+            throw new DuplicateResourceException("email already taken");
+        }
+
+        Customer customer = new Customer(customerRegistrationRequest.name(), customerRegistrationRequest.email(),
+                                         Integer.parseInt(customerRegistrationRequest.age()));
+        customerDao.insertCustomer(customer);
+    }
 }
