@@ -8,11 +8,11 @@ public interface CustomerDao {
 
     Optional<Customer> selectCustomerById(Integer id);
 
-    boolean existsPersonWithEmail(String email);
+    boolean existsCustomerWithEmail(String email);
 
     void insertCustomer(Customer customer);
 
-    boolean existsPersonWithId(Integer id);
+    boolean existsCustomerById(Integer id);
 
     void deleteCustomerById(Integer id);
 
