@@ -58,6 +58,33 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
     }
 
     @Test
+    void insertCustomer() {
+        String name = FAKER.name()
+                           .fullName();
+        String email = FAKER.internet()
+                            .safeEmailAddress() + "-" + UUID.randomUUID();
+        int age = 20;
+
+        Customer customer = new Customer(name, email, age);
+
+        underTest.insertCustomer(customer);
+
+        Optional<Customer> actual = Optional.of(underTest.selectAllCustomers()
+                                                         .stream()
+                                                         .filter(c -> c.getEmail()
+                                                                       .equals(email))
+                                                         .findFirst()
+                                                         .orElseThrow());
+        assertThat(actual).isPresent()
+                          .hasValueSatisfying(c -> {
+                              assertThat(c.getId()).isNotEqualTo(null);
+                              assertThat(c.getName()).isEqualTo(customer.getName());
+                              assertThat(c.getEmail()).isEqualTo(customer.getEmail());
+                              assertThat(c.getAge()).isEqualTo(customer.getAge());
+                          });
+    }
+
+    @Test
     void willReturnEmptyWhenSelectCustomerById() {
         int id = 0;
 
