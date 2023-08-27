@@ -1,7 +1,7 @@
 package com.kushal.fullstack.customer.repository;
 
 import com.kushal.fullstack.AbstractTestContainers;
-import com.kushal.fullstack.customer.Customer;
+import com.kushal.fullstack.customer.model.Customer;
 import com.kushal.fullstack.customer.CustomerRowMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

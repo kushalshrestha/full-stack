@@ -1,5 +1,9 @@
-package com.kushal.fullstack.customer;
+package com.kushal.fullstack.customer.controller;
 
+import com.kushal.fullstack.customer.model.Customer;
+import com.kushal.fullstack.customer.CustomerRegistrationRequest;
+import com.kushal.fullstack.customer.service.CustomerService;
+import com.kushal.fullstack.customer.CustomerUpdateRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

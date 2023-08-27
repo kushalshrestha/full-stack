@@ -1,7 +1,6 @@
 package com.kushal.fullstack.customer.repository;
 
-import com.kushal.fullstack.customer.Customer;
-import com.kushal.fullstack.customer.CustomerRepository;
+import com.kushal.fullstack.customer.model.Customer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -90,4 +89,5 @@ public class CustomerJPADataAccessServiceTest {
         underTest.updateCustomer(customer);
         verify(customerRepository).save(customer);
     }
+
 }

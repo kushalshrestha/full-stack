@@ -1,5 +1,9 @@
-package com.kushal.fullstack.customer;
+package com.kushal.fullstack.customer.service;
 
+import com.kushal.fullstack.customer.CustomerDao;
+import com.kushal.fullstack.customer.CustomerRegistrationRequest;
+import com.kushal.fullstack.customer.CustomerUpdateRequest;
+import com.kushal.fullstack.customer.model.Customer;
 import com.kushal.fullstack.exception.DuplicateResourceException;
 import com.kushal.fullstack.exception.RequestValidationException;
 import com.kushal.fullstack.exception.ResourceNotFoundException;

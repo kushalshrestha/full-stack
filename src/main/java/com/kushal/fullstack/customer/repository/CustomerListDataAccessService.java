@@ -1,6 +1,6 @@
 package com.kushal.fullstack.customer.repository;
 
-import com.kushal.fullstack.customer.Customer;
+import com.kushal.fullstack.customer.model.Customer;
 import com.kushal.fullstack.customer.CustomerDao;
 import org.springframework.stereotype.Repository;
 

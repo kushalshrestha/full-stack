@@ -1,4 +1,4 @@
-package com.kushal.fullstack.customer;
+package com.kushal.fullstack.customer.model;
 
 import jakarta.persistence.*;
 

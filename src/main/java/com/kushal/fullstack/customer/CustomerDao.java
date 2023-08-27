@@ -1,5 +1,7 @@
 package com.kushal.fullstack.customer;
 
+import com.kushal.fullstack.customer.model.Customer;
+
 import java.util.List;
 import java.util.Optional;
 

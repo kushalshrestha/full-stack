@@ -1,5 +1,6 @@
 package com.kushal.fullstack.customer;
 
+import com.kushal.fullstack.customer.model.Customer;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
