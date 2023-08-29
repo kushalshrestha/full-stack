@@ -36,7 +36,7 @@ public class CustomerService {
             throw new DuplicateResourceException("email already taken");
         }
 
-        Customer customer = new Customer(customerRegistrationRequest.name(), customerRegistrationRequest.email(), Integer.parseInt(customerRegistrationRequest.age()));
+        Customer customer = new Customer(customerRegistrationRequest.name(), customerRegistrationRequest.email(), customerRegistrationRequest.age());
         customerDao.insertCustomer(customer);
     }
 

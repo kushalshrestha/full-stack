@@ -89,6 +89,18 @@
 			<scope>test</scope>
 		</dependency>
 
+<!-- spring-boot-starter-webflux For building reactive web applications.
+Reactive web applications are built using asynchronous non-blocking I/O,
+which makes them more scalable and efficient than traditional synchronous
+web applications.
+But here we're using for integration testing.
+-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 
 
 

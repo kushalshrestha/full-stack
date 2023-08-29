@@ -66,7 +66,7 @@ public class CustomerServiceTest {
         when(customerDao.existsCustomerWithEmail(email)).thenReturn(false);
 
         //When
-        CustomerRegistrationRequest customerRequest = new CustomerRegistrationRequest("Kushal", email, "20");
+        CustomerRegistrationRequest customerRequest = new CustomerRegistrationRequest("Kushal", email, 20);
         underTest.addCustomer(customerRequest);
 
         //Then
