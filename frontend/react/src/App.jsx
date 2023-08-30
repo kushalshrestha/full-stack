@@ -1,12 +1,7 @@
-import {
-    Wrap,
-    WrapItem,
-    Spinner,
-    Text
-} from '@chakra-ui/react';
+import {Spinner} from '@chakra-ui/react';
+import {useEffect, useState} from 'react';
+import {getCustomers} from "./services/client.js";
 import UserProfile from "./UserProfile.jsx";
-import {useState, useEffect} from 'react';
-import { getCustomers } from "./services/client.js";
 
 const App = () => {
     const [customers, setCustomers] = useState([]);
@@ -24,14 +19,31 @@ const App = () => {
     }, [])
 
     if (loading) {
-        return (<><p>LOADING</p></>)
-    } else {
-        return (<><p>FETCHED</p></>)
+        return (<Spinner
+                thickness='4px'
+                speed='0.65s'
+                emptyColor='gray.200'
+                color='blue.500'
+                size='xl'
+            />)
     }
+    if (customers.length <= 0) {
+        return (<p>No customers available</p>)
+    }
+
+    return (<div>
+        {customers.map((user, index) => (
+            <UserProfile
+                key={index}
+                name={user.name}
+                age={user.age}
+                gender={user.gender}
+                imageNumber={index}
+            />
+        ))}
+
+    </div>)
 };
-
-
-
 
 
 //
@@ -109,9 +121,6 @@ const App = () => {
 // }
 
 export default App
-
-
-
 
 
 // import { useState } from 'react'
