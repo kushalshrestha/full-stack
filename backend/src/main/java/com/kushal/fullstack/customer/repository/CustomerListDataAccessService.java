@@ -2,6 +2,7 @@ package com.kushal.fullstack.customer.repository;
 
 import com.kushal.fullstack.customer.model.Customer;
 import com.kushal.fullstack.customer.CustomerDao;
+import com.kushal.fullstack.customer.model.Gender;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -17,10 +18,10 @@ public class CustomerListDataAccessService implements CustomerDao {
     static {
         customers = new ArrayList<>();
 
-        Customer alex = new Customer(1, "Alex", "alex@gmail.com", 21);
+        Customer alex = new Customer("Alex", "alex@gmail.com", 21, Gender.MALE);
         customers.add(alex);
 
-        Customer jamila = new Customer(2, "Jamila", "jamila@gmail.com", 19);
+        Customer jamila = new Customer("Jamila", "jamila@gmail.com", 19, Gender.MALE);
         customers.add(jamila);
     }
 
