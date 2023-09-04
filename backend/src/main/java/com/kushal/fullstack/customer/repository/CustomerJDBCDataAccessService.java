@@ -26,7 +26,7 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
     @Override
     public List<Customer> selectAllCustomers() {
         var sql = """
-                SELECT id, name, email, age
+                SELECT id, name, email, age, gender
                 FROM customer
                 """;
 
@@ -36,7 +36,7 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
     @Override
     public Optional<Customer> selectCustomerById(Integer id) {
         var sql = """
-                SELECT id, name, email, age
+                SELECT id, name, email, age, gender
                 FROM customer
                 WHERE id = ?
                 """;
@@ -48,10 +48,11 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
     @Override
     public void insertCustomer(Customer customer) {
         var sql = """
-                INSERT INTO customer(id, name, email, age)
-                VALUES (nextval('customer_id_seq'),?, ?, ?)
+                INSERT INTO customer(id, name, email, age, gender)
+                VALUES (nextval('customer_id_seq'),?, ?, ?, ?)
                 """;
-        int result = jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getAge());
+        int result = jdbcTemplate.update(sql, customer.getName(), customer.getEmail(), customer.getAge(),
+                                         customer.getGender().name());
 
         System.out.println("insertCustomer result " + result);
     }
@@ -105,6 +106,11 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
             String sql = "UPDATE customer SET email = ? WHERE id = ?";
             int result = jdbcTemplate.update(sql, update.getEmail(), update.getId());
             System.out.println("update customer email result = " + result);
+        }
+        if (update.getGender() != null) {
+            String sql = "UPDATE customer SET gender = ? WHERE id = ?";
+            int result = jdbcTemplate.update(sql, update.getGender(), update.getId());
+            System.out.println("update customer gender result = " + result);
         }
     }
 }

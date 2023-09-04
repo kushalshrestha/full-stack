@@ -3,6 +3,7 @@ package com.kushal.fullstack.customer.repository;
 import com.kushal.fullstack.AbstractTestContainers;
 import com.kushal.fullstack.customer.model.Customer;
 import com.kushal.fullstack.customer.CustomerRowMapper;
+import com.kushal.fullstack.customer.model.Gender;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +28,7 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
     void selectAllCustomer() {
         Customer customer = new Customer(FAKER.name()
                                               .fullName(), FAKER.internet()
-                                                                .emailAddress() + "-" + UUID.randomUUID(), 20);
+                                                                .emailAddress() + "-" + UUID.randomUUID(), 20, Gender.MALE);
         underTest.insertCustomer(customer);
         List<Customer> actual = underTest.selectAllCustomers();
         assertThat(actual).isNotEmpty();
@@ -38,7 +39,7 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
         String email = FAKER.internet()
                             .emailAddress() + "-" + UUID.randomUUID();
         Customer customer = new Customer(FAKER.name()
-                                              .fullName(), email, 20);
+                                              .fullName(), email, 20, Gender.MALE);
         underTest.insertCustomer(customer);
         int id = underTest.selectAllCustomers()
                           .stream()
@@ -66,7 +67,7 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
                             .safeEmailAddress() + "-" + UUID.randomUUID();
         int age = 20;
 
-        Customer customer = new Customer(name, email, age);
+        Customer customer = new Customer(name, email, age, Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -101,7 +102,7 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
         String email = FAKER.internet()
                             .safeEmailAddress() + "-" + UUID.randomUUID();
         Customer customer = new Customer(FAKER.name()
-                                              .fullName(), email, 20);
+                                              .fullName(), email, 20, Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -132,7 +133,7 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
                             .safeEmailAddress() + "-" + UUID.randomUUID();
 
         Customer customer = new Customer(FAKER.name()
-                                              .fullName(), email, 20);
+                                              .fullName(), email, 20, Gender.MALE);
         underTest.insertCustomer(customer);
 
         Integer id = underTest.selectAllCustomers()
@@ -165,7 +166,7 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
                             .safeEmailAddress() + "-" + UUID.randomUUID();
 
         Customer customer = new Customer(FAKER.name()
-                                              .fullName(), email, 20);
+                                              .fullName(), email, 20, Gender.MALE);
         underTest.insertCustomer(customer);
 
         int id = underTest.selectAllCustomers()
@@ -187,7 +188,7 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
         String email = FAKER.internet()
                             .safeEmailAddress() + "-" + UUID.randomUUID();
         Customer customer = new Customer(FAKER.name()
-                                              .fullName(), email, 20);
+                                              .fullName(), email, 20, Gender.MALE);
         underTest.insertCustomer(customer);
         int id = underTest.selectAllCustomers()
                           .stream()
@@ -222,7 +223,7 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
         String email = FAKER.internet()
                             .safeEmailAddress() + "-" + UUID.randomUUID();
         Customer customer = new Customer(FAKER.name()
-                                              .fullName(), email, 20);
+                                              .fullName(), email, 20, Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -262,7 +263,7 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
         String email = FAKER.internet()
                             .safeEmailAddress() + "-" + UUID.randomUUID();
         Customer customer = new Customer(FAKER.name()
-                                              .fullName(), email, 20);
+                                              .fullName(), email, 20, Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -301,7 +302,7 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
         String email = FAKER.internet()
                             .safeEmailAddress() + "-" + UUID.randomUUID();
         Customer customer = new Customer(FAKER.name()
-                                              .fullName(), email, 20);
+                                              .fullName(), email, 20, Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -336,7 +337,7 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
         String email = FAKER.internet()
                             .safeEmailAddress() + "-" + UUID.randomUUID();
         Customer customer = new Customer(FAKER.name()
-                                              .fullName(), email, 20);
+                                              .fullName(), email, 20, Gender.MALE);
 
         underTest.insertCustomer(customer);
 
@@ -363,6 +364,7 @@ public class CustomerJDBCDataAccessServiceTest extends AbstractTestContainers {
                               assertThat(c.getAge()).isEqualTo(customer.getAge());
                               assertThat(c.getName()).isEqualTo(customer.getName());
                               assertThat(c.getEmail()).isEqualTo(customer.getEmail());
+                              assertThat(c.getGender()).isEqualTo(customer.getGender());
                           });
     }
 

@@ -3,6 +3,7 @@ package com.kushal.fullstack.integration;
 import com.github.javafaker.Faker;
 import com.kushal.fullstack.customer.CustomerRegistrationRequest;
 import com.kushal.fullstack.customer.model.Customer;
+import com.kushal.fullstack.customer.model.Gender;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -27,10 +29,13 @@ public class CustomerIntegrationTest {
     @Test
     void canRegisterCustomer() {
         Faker faker = new Faker();
-        String name = faker.name().fullName();
-        String email = faker.internet().safeEmailAddress() + "-" + UUID.randomUUID();
+        String name = faker.name()
+                           .fullName();
+        String email = faker.internet()
+                            .safeEmailAddress() + "-" + UUID.randomUUID();
         int age = RANDOM.nextInt(1, 100);
-        CustomerRegistrationRequest customerRequest = new CustomerRegistrationRequest(name, email, age);
+        Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
+        CustomerRegistrationRequest customerRequest = new CustomerRegistrationRequest(name, email, age, gender);
 
         webTestClient.post()
                      .uri(CUSTOMER_URI)
@@ -53,13 +58,14 @@ public class CustomerIntegrationTest {
                                                    .getResponseBody();
 
         // make sure that customer is present
-        Customer expectedCustomer = new Customer(name, email, age);
+        Customer expectedCustomer = new Customer(name, email, age, gender);
 
         assertThat(allCustomers).usingRecursiveFieldByFieldElementComparatorIgnoringFields("id")
-                .contains(expectedCustomer);
+                                .contains(expectedCustomer);
 
         int id = allCustomers.stream()
-                             .filter(customer -> customer.getEmail().equals(email))
+                             .filter(customer -> customer.getEmail()
+                                                         .equals(email))
                              .map(Customer::getId)
                              .findFirst()
                              .orElseThrow();
@@ -73,8 +79,7 @@ public class CustomerIntegrationTest {
                      .exchange()
                      .expectStatus()
                      .isOk()
-                     .expectBody(new ParameterizedTypeReference<Customer>() {
-                     })
+                     .expectBody(new ParameterizedTypeReference<Customer>() {})
                      .isEqualTo(expectedCustomer);
     }
 

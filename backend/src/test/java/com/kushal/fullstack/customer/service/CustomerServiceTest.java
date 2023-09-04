@@ -3,6 +3,7 @@ package com.kushal.fullstack.customer.service;
 import com.kushal.fullstack.customer.CustomerDao;
 import com.kushal.fullstack.customer.CustomerRegistrationRequest;
 import com.kushal.fullstack.customer.model.Customer;
+import com.kushal.fullstack.customer.model.Gender;
 import com.kushal.fullstack.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -41,7 +42,7 @@ public class CustomerServiceTest {
     @Test
     void getCustomer() {
         int id = 10;
-        Customer customer = new Customer(id, "Kushal", "kushalshr@gmail.com", 20);
+        Customer customer = new Customer("Kushal", "kushalshr@gmail.com", 20, Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
@@ -66,7 +67,7 @@ public class CustomerServiceTest {
         when(customerDao.existsCustomerWithEmail(email)).thenReturn(false);
 
         //When
-        CustomerRegistrationRequest customerRequest = new CustomerRegistrationRequest("Kushal", email, 20);
+        CustomerRegistrationRequest customerRequest = new CustomerRegistrationRequest("Kushal", email, 20, Gender.MALE);
         underTest.addCustomer(customerRequest);
 
         //Then

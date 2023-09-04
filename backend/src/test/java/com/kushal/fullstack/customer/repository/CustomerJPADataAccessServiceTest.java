@@ -1,6 +1,7 @@
 package com.kushal.fullstack.customer.repository;
 
 import com.kushal.fullstack.customer.model.Customer;
+import com.kushal.fullstack.customer.model.Gender;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +19,7 @@ public class CustomerJPADataAccessServiceTest {
     private CustomerRepository customerRepository;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
 //        MockitoAnnotations - class from the Mockito framework, prepares
 //        the test class with mock objects that are ready to be used in your
 //        test methods.
@@ -43,22 +44,22 @@ public class CustomerJPADataAccessServiceTest {
 
 
     @Test
-    void selectCustomerById(){
+    void selectCustomerById() {
         int id = 1;
         underTest.selectCustomerById(id);
         verify(customerRepository).findById(id);
     }
 
     @Test
-    void insertCustomer(){
-        Customer customer = new Customer(1, "Kushal", "kushalshr@gmail.com", 20);
+    void insertCustomer() {
+        Customer customer = new Customer("Kushal", "kushalshr@gmail.com", 20, Gender.MALE);
 
         underTest.insertCustomer(customer);
         verify(customerRepository).save(customer);
     }
 
     @Test
-    void existsCustomerByEmail(){
+    void existsCustomerByEmail() {
         // Given
         String email = "kushalshr@gmail.com";
         // When
@@ -68,7 +69,7 @@ public class CustomerJPADataAccessServiceTest {
     }
 
     @Test
-    void existsCustomerById(){
+    void existsCustomerById() {
         int id = 1;
 
         underTest.existsCustomerById(id);
@@ -77,15 +78,15 @@ public class CustomerJPADataAccessServiceTest {
     }
 
     @Test
-    void deleteCustomerById(){
+    void deleteCustomerById() {
         int id = 1;
         underTest.deleteCustomerById(id);
         verify(customerRepository).deleteById(id);
     }
 
     @Test
-    void updateCustomer(){
-        Customer customer = new Customer(1, "Kushal", "kushalshr@gmail.com", 20);
+    void updateCustomer() {
+        Customer customer = new Customer("Kushal", "kushalshr@gmail.com", 20, Gender.MALE);
         underTest.updateCustomer(customer);
         verify(customerRepository).save(customer);
     }
