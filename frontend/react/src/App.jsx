@@ -73,7 +73,6 @@ const App = () => {
                     imageNumber={index}
                     fetchCustomers={fetchCustomers}
                     />
-                    {console.log(customers)}
                 </WrapItem>
             ))}
         </Wrap>

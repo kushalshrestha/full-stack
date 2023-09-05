@@ -46,7 +46,7 @@ export default function CardWithImage({id, name, email, age, gender, imageNumber
                     <Avatar
                         size={'xl'}
                         src={
-                            `https://randomuser.me/api/portraits/${randomUserGender}/${imageNumber}.jpg`
+                            `https://randomuser.me/api/portraits/${randomUserGender}/${imageNumber+3}.jpg`
                         }
                         alt={'Author'}
                         css={{
@@ -54,7 +54,6 @@ export default function CardWithImage({id, name, email, age, gender, imageNumber
                         }}
                     />
                 </Flex>
-
                 <Box p={6}>
                     <Stack spacing={2} align={'center'} mb={5}>
                         <Tag borderRadius={"full"}>{id}</Tag>
