@@ -2,9 +2,9 @@ import {Spinner, Wrap, WrapItem, Text} from '@chakra-ui/react';
 import {useEffect, useState} from 'react';
 import {getCustomers} from "./services/client.js";
 import SidebarWithHeader from "./components/shared/SideBar.jsx";
-import CardWithImage from "./components/Card";
-import DrawerForm from "./components/DrawerForm.jsx";
+import CardWithImage from "./components/CustomerCard.jsx";
 import {errorNotification} from "./services/notification.js";
+import CreateCustomerDrawer from './components/customer/CreateCustomerDrawer.jsx';
 
 const App = () => {
     const [customers, setCustomers] = useState([]);
@@ -43,7 +43,7 @@ const App = () => {
     if (err) {
         return (
             <SidebarWithHeader>
-                <DrawerForm
+                <CreateCustomerDrawer
                     fetchCustomers = {fetchCustomers}
                 />
                 <Text mt={5}>Ooops there was an error</Text>
@@ -54,7 +54,7 @@ const App = () => {
     if(customers.length <= 0) {
         return (
             <SidebarWithHeader>
-                <DrawerForm
+                <CreateCustomerDrawer
                     fetchCustomers={fetchCustomers}
                 />
                 <Text mt={5}>No customers available</Text>
@@ -63,7 +63,7 @@ const App = () => {
     }
 
     return (<SidebarWithHeader>
-        <DrawerForm
+        <CreateCustomerDrawer
                     fetchCustomers = {fetchCustomers}
                 />
         <Wrap justify={"center"} spacing={"30px"}>

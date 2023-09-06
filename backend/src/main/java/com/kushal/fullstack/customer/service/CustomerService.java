@@ -36,9 +36,7 @@ public class CustomerService {
             throw new DuplicateResourceException("email already taken");
         }
 
-        Customer customer = new Customer(customerRegistrationRequest.name(), customerRegistrationRequest.email(),
-                                         customerRegistrationRequest.age(),
-                                         customerRegistrationRequest.gender());
+        Customer customer = new Customer(customerRegistrationRequest.name(), customerRegistrationRequest.email(), customerRegistrationRequest.age(), customerRegistrationRequest.gender());
         customerDao.insertCustomer(customer);
     }
 
@@ -61,7 +59,7 @@ public class CustomerService {
             throw new ResourceNotFoundException("customer with id [%s] not found".formatted(customerId));
         }
 
-        if (customerDao.existsCustomerWithEmail(updateRequest.email())) {
+        if (customerDao.existsCustomerWithEmail(updateRequest.email()) && !customer.getEmail().equals(updateRequest.email())) {
             throw new DuplicateResourceException("email already taken");
         }
 
@@ -78,6 +76,12 @@ public class CustomerService {
         if (updateRequest.age() != null && !updateRequest.age()
                                                          .equals(customer.getAge())) {
             customer.setAge(updateRequest.age());
+            changes = true;
+        }
+
+        if (updateRequest.gender() != null && !updateRequest.gender()
+                                                         .equals(customer.getGender())) {
+            customer.setGender(updateRequest.gender());
             changes = true;
         }
 
