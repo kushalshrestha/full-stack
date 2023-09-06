@@ -109,7 +109,7 @@ public class CustomerJDBCDataAccessService implements CustomerDao {
         }
         if (update.getGender() != null) {
             String sql = "UPDATE customer SET gender = ? WHERE id = ?";
-            int result = jdbcTemplate.update(sql, update.getGender(), update.getId());
+            int result = jdbcTemplate.update(sql, update.getGender().toString(), update.getId());
             System.out.println("update customer gender result = " + result);
         }
     }

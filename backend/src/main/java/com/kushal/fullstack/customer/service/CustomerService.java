@@ -70,7 +70,7 @@ public class CustomerService {
         }
         if (updateRequest.email() != null && !updateRequest.email()
                                                            .equals(customer.getEmail())) {
-            customer.setName(updateRequest.email());
+            customer.setEmail(updateRequest.email());
             changes = true;
         }
         if (updateRequest.age() != null && !updateRequest.age()
