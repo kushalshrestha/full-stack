@@ -9,9 +9,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Random;
+import java.util.UUID;
 
 @SpringBootApplication
 @RestController
@@ -33,7 +35,7 @@ public class FullStackApplication {
 
 
     @Bean
-    CommandLineRunner runner(CustomerRepository customerRepository) {
+    CommandLineRunner runner(CustomerRepository customerRepository, PasswordEncoder passwordEncoder) {
         return args -> {
 //            Customer kushal = new Customer("Kushal", "kushalshr@gmail.com", 21);
 //
@@ -52,6 +54,7 @@ public class FullStackApplication {
             Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
                 Customer customer = new Customer(firstName + " " + lastName,
                                                  firstName.toLowerCase() + "." + lastName.toLowerCase() + "@gmail.com",
+                                                 passwordEncoder.encode(UUID.randomUUID().toString()),
                                                  age, gender);
                 customerRepository.save(customer);
             };
