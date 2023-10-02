@@ -1,15 +1,12 @@
 package com.kushal.fullstack.customer.model;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
 import java.util.Objects;
 
 @Entity
 @Table(name = "customer", uniqueConstraints = {@UniqueConstraint(name = "customer_email_unique", columnNames = "email")})
-public class Customer implements UserDetails {
+public class Customer {
 
     @Id
     @SequenceGenerator(name = "customer_id_seq", sequenceName = "customer_id_seq", allocationSize = 1)
@@ -26,9 +23,6 @@ public class Customer implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(nullable = false)
-    private String password;
-
     public Customer() {
     }
 
@@ -36,14 +30,12 @@ public class Customer implements UserDetails {
             Integer id,
             String name,
             String email,
-            String password,
             Integer age,
             Gender gender
     ) {
         this.id = id;
         this.name = name;
         this.email = email;
-        this.password = password;
         this.age = age;
         this.gender = gender;
     }
@@ -51,13 +43,11 @@ public class Customer implements UserDetails {
     public Customer(
             String name,
             String email,
-            String password,
             Integer age,
             Gender gender
     ) {
         this.name = name;
         this.email = email;
-        this.password = password;
         this.age = age;
         this.gender = gender;
     }
@@ -120,40 +110,5 @@ public class Customer implements UserDetails {
     @Override
     public String toString() {
         return "Customer{" + "id=" + id + ", name='" + name + '\'' + ", email='" + email + '\'' + ", age=" + age + ", gender=" + gender + '}';
-    }
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return false;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return false;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return false;
     }
 }
